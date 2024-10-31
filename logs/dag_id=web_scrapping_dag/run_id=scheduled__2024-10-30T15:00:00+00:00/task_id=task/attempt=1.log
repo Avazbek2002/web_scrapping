@@ -1,0 +1,66 @@
+[2024-10-30T16:23:28.676+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-10-30T16:23:28.687+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: web_scrapping_dag.task scheduled__2024-10-30T15:00:00+00:00 [queued]>
+[2024-10-30T16:23:28.692+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: web_scrapping_dag.task scheduled__2024-10-30T15:00:00+00:00 [queued]>
+[2024-10-30T16:23:28.692+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 1
+[2024-10-30T16:23:28.700+0000] {taskinstance.py:2888} INFO - Executing <Task(PythonOperator): task> on 2024-10-30 15:00:00+00:00
+[2024-10-30T16:23:28.703+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=1085) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-10-30T16:23:28.704+0000] {standard_task_runner.py:72} INFO - Started process 1086 to run task
+[2024-10-30T16:23:28.705+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'web_scrapping_dag', 'task', 'scheduled__2024-10-30T15:00:00+00:00', '--job-id', '11', '--raw', '--subdir', 'DAGS_FOLDER/first_dag_with_python.py', '--cfg-path', '/tmp/tmpw1o_lic_']
+[2024-10-30T16:23:28.707+0000] {standard_task_runner.py:105} INFO - Job 11: Subtask task
+[2024-10-30T16:23:28.732+0000] {task_command.py:467} INFO - Running <TaskInstance: web_scrapping_dag.task scheduled__2024-10-30T15:00:00+00:00 [running]> on host 0c345cfeaacd
+[2024-10-30T16:23:28.782+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='web_scrapping_dag' AIRFLOW_CTX_TASK_ID='task' AIRFLOW_CTX_EXECUTION_DATE='2024-10-30T15:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-10-30T15:00:00+00:00'
+[2024-10-30T16:23:28.783+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-10-30T16:23:29.621+0000] {logging_mixin.py:190} INFO - data/29.10.2024.csv ------
+[2024-10-30T16:23:30.123+0000] {logging_mixin.py:190} INFO - Saved article: Shopenning yo‘qolgan musiqiy asari qariyb 200 yildan keyin topildi
+[2024-10-30T16:23:30.260+0000] {logging_mixin.py:190} INFO - Saved article: Yevrokomissiya Xitoy elektromobillariga 35 foizgacha boj joriy etishni ma’qulladi
+[2024-10-30T16:23:30.459+0000] {logging_mixin.py:190} INFO - Saved article: Chechenistonda maxsus kuchlar universitetiga dron hujum qildi. Ramzan Qodirov qasos olishga va’da berdi
+[2024-10-30T16:23:30.647+0000] {logging_mixin.py:190} INFO - Saved article: Qirg‘izistonda besh nafar general unvonidan mahrum qilindi
+[2024-10-30T16:23:30.829+0000] {logging_mixin.py:190} INFO - Saved article: AQSh va Yevropa nima sababdan turlicha iqtisodiy qiyinchiliklarga duch kelyapti?
+[2024-10-30T16:23:30.986+0000] {logging_mixin.py:190} INFO - Saved article: Zelenskiyning «g‘alaba rejasi» ba’zi tafsilotlari ma’lum bo‘ldi – OAV
+[2024-10-30T16:23:31.222+0000] {logging_mixin.py:190} INFO - Saved article: Putin yadroviy tiyib turuvchi kuchlarni sinovdan o‘tkazdi
+[2024-10-30T16:23:31.587+0000] {logging_mixin.py:190} INFO - Saved article: Oltinga qiziqishning oshayotgani dollar dominantligiga soya soladi - FT
+[2024-10-30T16:23:31.744+0000] {logging_mixin.py:190} INFO - Saved article: Jizzaxda 8,6 mlrd so‘mlik elektr energiyasidan noqonuniy foydalangan “metan zapravka” aniqlandi
+[2024-10-30T16:23:31.899+0000] {logging_mixin.py:190} INFO - Saved article: KXDR rahbari Kim Chen Inning xavfsizligi kuchaytirildi – OAV
+[2024-10-30T16:23:32.281+0000] {logging_mixin.py:190} INFO - Saved article: Yagona saylov okrugi bo‘yicha saylov natijalari tasdiqlandi
+[2024-10-30T16:23:32.409+0000] {logging_mixin.py:190} INFO - Saved article: Aspirant tasodifan Meksika junglilarida yo‘qolgan shaharni topdi
+[2024-10-30T16:23:32.531+0000] {logging_mixin.py:190} INFO - Saved article: Samarqand shahrida sodir bo‘lgan yong‘inda yashash xonadoni yonib ketdi
+[2024-10-30T16:23:32.690+0000] {logging_mixin.py:190} INFO - Saved article: Xitoy tovushdan tez uchuvchi yo‘lovchi samolyotni sinovdan muvaffaqiyatli o‘tkazdi
+[2024-10-30T16:23:32.844+0000] {logging_mixin.py:190} INFO - Saved article: Alisher Usmonov yana Xalqaro qilichbozlik federatsiyasi rahbari bo‘lishi mumkin
+[2024-10-30T16:23:32.988+0000] {logging_mixin.py:190} INFO - Saved article: “Odamlar qiynalishyapti” – boysunliklar hukumatdan amaliy yordam kutmoqda
+[2024-10-30T16:23:33.105+0000] {logging_mixin.py:190} INFO - Saved article: TikTok asoschisi Xitoyning eng badavlat insoniga aylandi
+[2024-10-30T16:23:33.392+0000] {logging_mixin.py:190} INFO - Saved article: NYT avgust oyida Kursk oblastida tinch aholi vakillari o‘ldirilgani aks etgan videoni o‘rgandi
+[2024-10-30T16:23:33.551+0000] {logging_mixin.py:190} INFO - Saved article: 29 oktyabr yangiliklari: O‘zbekistonda ro‘y bergan muhim voqea va hodisalar
+[2024-10-30T16:23:33.732+0000] {logging_mixin.py:190} INFO - Saved article: AQSh Shimoliy Koreya qo‘shinlari urushga qo‘shilsa, Ukraina uchun qurol cheklovini olib tashlash bilan tahdid qildi
+[2024-10-30T16:23:34.005+0000] {logging_mixin.py:190} INFO - Saved article: Toshkentda o‘g‘il bolaga qiz bola kiyimini kiydirib, sahna ko‘rinishi tashkillashtirgan tarbiyachi ishdan olindi
+[2024-10-30T16:23:34.161+0000] {logging_mixin.py:190} INFO - Saved article: Apple M4 chipli yangi iMac kompyuterini taqdim qildi
+[2024-10-30T16:23:34.303+0000] {logging_mixin.py:190} INFO - Saved article: Gurjistonda ommaviy norozilik ortidan saylovdagi ovozlar qayta sanaladi
+[2024-10-30T16:23:34.425+0000] {logging_mixin.py:190} INFO - Saved article: Rossiyada noqonuniy migrantlarga nisbatan jazo choralari kuchaytirildi
+[2024-10-30T16:23:34.670+0000] {logging_mixin.py:190} INFO - Saved article: ADM Jizzakh va Birinchi Rezinotexnika Zavodi o‘rtasida hamkorlik to‘g‘risida bitim imzolandi
+[2024-10-30T16:23:35.085+0000] {logging_mixin.py:190} INFO - Saved article: Toshkentda ikki talaba taksichini o‘ldirib, mashinasini olib qochmoqchi bo‘ldi
+[2024-10-30T16:23:38.393+0000] {logging_mixin.py:190} INFO - Saved article: Shimoliy Koreya Rossiyaga 5,5 mlrd dollarlik qurol yetkazib bergani aytilmoqda
+[2024-10-30T16:23:39.094+0000] {logging_mixin.py:190} INFO - Saved article: Xalqaro yirik iqlim sammiti Ozarboyjonda o‘tadi: COP29’dan nimalar kutilyapti?
+[2024-10-30T16:23:39.216+0000] {logging_mixin.py:190} INFO - Saved article: Rossiya sudi Googleʼni 2 undetsillion rubl jarimaga tortdi
+[2024-10-30T16:23:39.676+0000] {logging_mixin.py:190} INFO - Saved article: Olimlar gaz plitalaridan foydalanish va bevaqt o‘lim o‘rtasidagi bog‘liqlikni ma’lum qildi
+[2024-10-30T16:23:42.543+0000] {logging_mixin.py:190} INFO - Saved article: Yuqumli kasalliklar elektron monitoringi ishga tushirildi
+[2024-10-30T16:23:44.167+0000] {logging_mixin.py:190} INFO - Saved article: Ishdagi depressiya sabab har yili 12 milliard ish kuni yo‘qotilyapti – tavsiyalar
+[2024-10-30T16:23:46.273+0000] {logging_mixin.py:190} INFO - Saved article: SSV o‘zbekistonliklarga piyoda yurish foydalarini eslatdi
+[2024-10-30T16:23:46.704+0000] {logging_mixin.py:190} INFO - Saved article: Akram Afif - Osiyoda yilning eng yaxshi futbolchisi!
+[2024-10-30T16:23:47.607+0000] {logging_mixin.py:190} INFO - Saved article: Puerto Riko arxiyepiskopi Tramp uzr so‘rashini talab qildi
+[2024-10-30T16:23:48.149+0000] {logging_mixin.py:190} INFO - Saved article: Abbosbek Fayzullayev - Osiyoning eng yaxshi yosh futbolchisi!
+[2024-10-30T16:23:49.394+0000] {logging_mixin.py:190} INFO - Saved article: 2025 yilda O‘zbekiston 5,5 mlrd dollargacha tashqi qarz olishi mumkin
+[2024-10-30T16:23:49.755+0000] {logging_mixin.py:190} INFO - Saved article: Samarqandda sodir bo‘lgan YTHda haydovchi vafot etdi
+[2024-10-30T16:23:50.837+0000] {logging_mixin.py:190} INFO - Saved article: Yevropaliklar uy-joyga pul to‘lash uchun oziq-ovqat xarajatlarini kamaytirishga majbur bo‘lmoqda - so‘rovnoma
+[2024-10-30T16:23:52.378+0000] {logging_mixin.py:190} INFO - Saved article: Apple o‘zining eng kichik kompyuterini taqdim etadi
+[2024-10-30T16:23:54.848+0000] {logging_mixin.py:190} INFO - Saved article: Afg‘onistonda ayol olti egizakni dunyoga keltirdi
+[2024-10-30T16:39:23.983+0000] {job.py:229} INFO - Heartbeat recovered after 930.03 seconds
+[2024-10-30T16:45:31.648+0000] {job.py:229} INFO - Heartbeat recovered after 312.16 seconds
+[2024-10-30T17:01:26.819+0000] {job.py:229} INFO - Heartbeat recovered after 929.97 seconds
+[2024-10-30T17:01:31.845+0000] {local_task_job_runner.py:346} WARNING - State of this instance has been externally set to failed. Terminating instance.
+[2024-10-30T17:01:31.851+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2024-10-30T17:01:31.853+0000] {process_utils.py:132} INFO - Sending 15 to group 1086. PIDs of all processes in the group: [1086]
+[2024-10-30T17:01:31.854+0000] {process_utils.py:87} INFO - Sending the signal 15 to group 1086
+[2024-10-30T17:01:31.856+0000] {taskinstance.py:3092} ERROR - Received SIGTERM. Terminating subprocesses.
+[2024-10-30T17:01:31.918+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-10-30T17:01:31.957+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=1086, status='terminated', exitcode=0, started='16:23:28') (1086) terminated with exit code 0
