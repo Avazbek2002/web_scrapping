@@ -22,14 +22,13 @@ def start_scrapping():
     # filepath = "/Users/isroilov/Desktop/uzinfocom/web_scrapping/" + str(yesterday) + ".csv"
 
     # Use Airflow's default data directory
-    airflow_home = "data"
-    # output_dir = os.path.join(airflow_home, "data")
+    airflow_home = "/opt/airflow/"
+    output_dir = os.path.join(airflow_home, "data")
     
     # Create the directory if it doesn't exist
-    # os.makedirs(output_dir, exist_ok=True)
+    os.makedirs(output_dir, exist_ok=True)
     
     filepath = os.path.join(airflow_home, f"{yesterday}.csv")
-    print(filepath, '------')
     
     # Create or open CSV file
     with open(filepath, 'w', newline='', encoding='utf-8') as file:
@@ -115,3 +114,5 @@ with DAG(dag_id="web_scrapping_dag",
     task = PythonOperator(
         task_id="task",
         python_callable=start_scrapping)
+
+# https://ragug.medium.com/how-to-upload-files-using-the-google-drive-api-in-python-ebefdfd63eab
