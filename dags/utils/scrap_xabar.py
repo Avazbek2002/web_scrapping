@@ -7,7 +7,7 @@ def scrap_xabar():
     URL="https://xabar.uz"
     news_url_list="https://xabar.uz/uz/yangiliklar?load=60"
     scrapped_data = []
-    
+
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
                   "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -44,6 +44,7 @@ def scrap_xabar():
             article_category = article_soup.find("div", class_="article__category").find("a").get_text()
 
             article_title = article_soup.find("h2", class_="post__title").get_text()
+            print(article_title)
             
             article_paras = article_soup.find_all("div", class_="post__body")
 
@@ -72,3 +73,5 @@ def scrap_xabar():
 
                 
     return scrapped_data
+
+scrap_xabar()

@@ -8,7 +8,22 @@ def scrap_kunuz():
     URL = "https://kun.uz"
     news_list_URL = "https://kun.uz/news/list"
     scrapped_data = []
-    page = requests.get(news_list_URL)
+
+    
+    try:
+        page = requests.get(news_list_URL)
+        # Check if the request was successful
+        if page.status_code == 200:
+            print("Item page fetched successfully!")
+        else:
+            print(f"Failed to fetch the item page. Status code: {page.status_code}")
+
+    except requests.exceptions.ConnectionError as e:
+        print(f"Connection error occurred: {e}")
+    except requests.exceptions.Timeout as e:
+        print(f"Request timed out: {e}")
+    except requests.exceptions.RequestException as e:
+        print(f"An error occurred: {e}")
 
     soup = BeautifulSoup(page.content, "html.parser")
 
@@ -18,6 +33,11 @@ def scrap_kunuz():
     yesterday = datetime.now() - timedelta(days=1)
 
     yesterday = yesterday.strftime("%d.%m.%Y")
+
+    log_file = open("KunUzLogs.txt", "w")
+
+    log_file.write("MAIN PAGE link: " + news_list_URL + "\n")
+
 
     while not stop_crawling:
         for item in news_items:
@@ -33,8 +53,25 @@ def scrap_kunuz():
 
             itam_page_link = item.find("a", class_="small-cards__default-text").get("href")
 
+            # fetch the article from the website
+            try:
+                item_page = requests.get(URL + itam_page_link)
+                # Check if the request was successful
+                if item_page.status_code == 200:
+                    print("Item page fetched successfully!")
+                else:
+                    print(f"Failed to fetch the item page. Status code: {item_page.status_code}")
+                    continue
 
-            item_page = requests.get(URL + itam_page_link)
+            except requests.exceptions.ConnectionError as e:
+                print(f"Connection error occurred: {e}")
+            except requests.exceptions.Timeout as e:
+                print(f"Request timed out: {e}")
+            except requests.exceptions.RequestException as e:
+                print(f"An error occurred: {e}")
+
+            log_file.write(URL + itam_page_link + "\n")
+
             page_content = BeautifulSoup(item_page.content, "html.parser")
 
             page_stats_string = page_content.find("div", class_="news-inner__content-stats").find("span").get_text()
@@ -73,17 +110,36 @@ def scrap_kunuz():
                 'Full Text': page_pure_text
             }
 
+
             scrapped_data.append(row_news)
 
-            # Optional: Print confirmation for each item processed
-            print(f"Saved article: {page_title}")
         
         extend_page_link = soup.find(id="lpagination")
-        print("result of extended page: " + str(extend_page_link))
         extend_page_link = extend_page_link.get("href")
-        extended_page = requests.get(URL + extend_page_link)
+
+        try:
+            extended_page = requests.get(URL + extend_page_link)
+            # Check if the request was successful
+            if extended_page.status_code == 200:
+                print("Item page fetched successfully!")
+            else:
+                print(f"Failed to fetch the item page. Status code: {extended_page.status_code}")
+                continue
+
+        except requests.exceptions.ConnectionError as e:
+            print(f"Connection error occurred: {e}")
+        except requests.exceptions.Timeout as e:
+            print(f"Request timed out: {e}")
+        except requests.exceptions.RequestException as e:
+            print(f"An error occurred: {e}")
+
+        log_file.write("\n" + 20 * "-" + "\n" + "MAIN PAGE LINK: " + URL + extend_page_link + "\n")
 
         soup = BeautifulSoup(extended_page.content, "html.parser")
         news_items = soup.find_all("div", class_="small-cards__default-link")
     
+    log_file.close()
+    
     return scrapped_data
+
+scrap_kunuz()

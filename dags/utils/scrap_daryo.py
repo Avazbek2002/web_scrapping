@@ -12,7 +12,8 @@ def scrap_daryo():
 
     soup = BeautifulSoup(page.content, "html.parser")
 
-    news_items = soup.find_all("div", class_="post-meta post-meta-a has-below")
+    news_items = soup.find_all("article", class_="l-post grid-post grid-base-post mini__article")
+    print(len(news_items))
 
     stop_crawling = False
     current_page = 1
@@ -45,6 +46,7 @@ def scrap_daryo():
             article_category = article_soup.find("a", "category term-color-1").get_text()
 
             article_title = article_soup.find("h1", class_="is-title post-title post-view-title").get_text()
+            print(article_title)
 
             article_paras = article_soup.find("div", class_="the-post s-post-modern").find_all("p")
 
@@ -79,5 +81,4 @@ def scrap_daryo():
     
     return scrapped_data
 
-
-print(scrap_daryo())
+scrap_daryo()
