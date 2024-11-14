@@ -1,2 +1,4 @@
 .env
 py_env
+logs
+dags/utils/KunUzLogs.txt
