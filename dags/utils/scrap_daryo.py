@@ -53,13 +53,8 @@ def scrap_daryo():
             page_pure_text = ""
 
             for paragraph in article_paras:
-                # Find all links in the paragraph
-                links = paragraph.find_all('a')
-                for link in links:
-                    # Replace the link tag with just its text content
-                    link.replace_with(link.get_text())
                 
-                page_pure_text = page_pure_text + paragraph.get_text()
+                page_pure_text = page_pure_text + paragraph.text
 
             page_pure_text = page_pure_text.replace('\n', '').replace('\xa0', '')
 
