@@ -14,6 +14,7 @@ def scrap_daryo():
 
     news_items = soup.find_all("article", class_="l-post grid-post grid-base-post mini__article")
     print(len(news_items))
+    print(news_items)
 
     stop_crawling = False
     current_page = 1
@@ -38,6 +39,7 @@ def scrap_daryo():
             # print(article_description)
 
             article_link = soup.find("a", class_="image-link media-ratio ratio-is-custom").get("href")
+            # print(article_link)
             
             article_page = requests.get(base_URL + article_link)
 
@@ -46,7 +48,7 @@ def scrap_daryo():
             article_category = article_soup.find("a", "category term-color-1").get_text()
 
             article_title = article_soup.find("h1", class_="is-title post-title post-view-title").get_text()
-            print(article_title)
+            # print(article_title)
 
             article_paras = article_soup.find("div", class_="the-post s-post-modern").find_all("p")
 
