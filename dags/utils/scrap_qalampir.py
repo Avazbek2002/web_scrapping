@@ -21,6 +21,10 @@ def scrap_qalampir():
         yesterday = datetime.now() - timedelta(days=1)
         formatted_date = yesterday.strftime("%d")
 
+        log_file = open("QalampirLogs.txt", "w")
+
+        log_file.write("MAIN PAGE link: " + news_url_list + "\n")
+
         offset = 30
         load_articles = 30
 
@@ -34,6 +38,8 @@ def scrap_qalampir():
                     break
 
                 news_url = news.find("a").get("href")
+
+                log_file.write(URL + news_url + "\n")
 
                 news_page = request_page(URL + news_url)
                 article_soup = BeautifulSoup(news_page.content, "html.parser")
@@ -71,8 +77,10 @@ def scrap_qalampir():
                 'offset': offset
             }
 
+
             offset += load_articles
             response = request_page(url, params=params)
+            log_file.write("\n" + 20 * "-" + "\n" + "MAIN PAGE LINK: " + f"{URL}/uz/post/latest-ajax?id=latest&limit={load_articles}&offset={offset}" + "\n")
             page_soup = BeautifulSoup(response.content, "html.parser")
             news_items = page_soup.find_all("div", class_="col-lg-4 col-md-6")
             print(len(news_items))

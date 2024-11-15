@@ -30,6 +30,10 @@ def scrap_xabar():
         formatted_day_before_yesterday = day_before_yesterday.strftime("%d/%m")
         number_of_articles = 30
 
+        log_file = open("XabarLogs.txt", "w")
+
+        log_file.write("MAIN PAGE link: " + news_url_list + "\n")
+
         while not stop_crawling:
             for news in news_items:
                 news_date = news.find("span", class_="date-time").get_text().split(",")
@@ -44,6 +48,8 @@ def scrap_xabar():
                 page_url = news.find("p", class_="news__item-title").find("a").get("href")
 
                 page = request_page(page_url, headers)
+                log_file.write(page_url + "\n")
+
                 article_soup = BeautifulSoup(page.content, "html.parser")
 
                 article_category = article_soup.find("div", class_="article__category").find("a").get_text()
@@ -78,6 +84,7 @@ def scrap_xabar():
                 writer.writerow(row)
 
             page = request_page(f"https://xabar.uz/uz/yangiliklar?load={number_of_articles}&_pjax=%23p0", headers)
+            log_file.write("\n" + 20 * "-" + "\n" + "MAIN PAGE LINK: " + f"https://xabar.uz/uz/yangiliklar?load={number_of_articles}&_pjax=%23p0" + "\n")
             soup = BeautifulSoup(page.content, "html.parser")
             news_items = soup.find_all("div", class_="media-info")[:-5]
             number_of_articles += 20
