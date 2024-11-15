@@ -21,7 +21,7 @@ def scrap_xabar():
         writer = csv.DictWriter(file, fieldnames=['Category', 'Title', 'Description', 'Full Text'])
         writer.writeheader()
 
-        page = requests.get(news_url_list, headers=headers)
+        page = request_page(news_url_list, headers)
         soup = BeautifulSoup(page.content, "html.parser")
         news_items = soup.find_all("div", class_="info")[:-5]
 
@@ -43,7 +43,7 @@ def scrap_xabar():
 
                 page_url = news.find("p", class_="news__item-title").find("a").get("href")
 
-                page = requests.get(page_url, headers=headers)
+                page = request_page(page_url, headers)
                 article_soup = BeautifulSoup(page.content, "html.parser")
 
                 article_category = article_soup.find("div", class_="article__category").find("a").get_text()
@@ -76,13 +76,32 @@ def scrap_xabar():
 
                 # Write row to CSV
                 writer.writerow(row)
-            
-            page = requests.get(f"https://xabar.uz/uz/yangiliklar?load={number_of_articles}&_pjax=%23p0", headers=headers)
+
+            page = request_page(f"https://xabar.uz/uz/yangiliklar?load={number_of_articles}&_pjax=%23p0", headers)
             soup = BeautifulSoup(page.content, "html.parser")
             news_items = soup.find_all("div", class_="media-info")[:-5]
             number_of_articles += 20
 
     print(f"Data has been written to {csv_file}")
+
+
+def request_page(link, headers):
+    try:
+        extended_page = requests.get(link, headers=headers)
+        # Check if the request was successful
+        if extended_page.status_code == 200:
+            print("Item page fetched successfully!")
+        else:
+            print(f"Failed to fetch the item page. Status code: {extended_page.status_code}")
+
+    except requests.exceptions.ConnectionError as e:
+        print(f"Connection error occurred: {e}")
+    except requests.exceptions.Timeout as e:
+        print(f"Request timed out: {e}")
+    except requests.exceptions.RequestException as e:
+        print(f"An error occurred: {e}")
+
+    return extended_page
 
 # Run the function
 scrap_xabar()
