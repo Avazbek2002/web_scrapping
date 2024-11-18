@@ -28,6 +28,7 @@ def scrap_xabar():
         stop_crawling = False
         day_before_yesterday = datetime.now() - timedelta(days=2)
         formatted_day_before_yesterday = day_before_yesterday.strftime("%d/%m")
+        offset = 10
         number_of_articles = 30
 
         log_file = open("XabarLogs.txt", "w")
@@ -38,12 +39,12 @@ def scrap_xabar():
             for news in news_items:
                 news_date = news.find("span", class_="date-time").get_text().split(",")
 
-                if (len(news_date) == 1) or (news_date[0] == "bugun"):
-                    continue
+                # if (len(news_date) == 1) or (news_date[0] == "bugun"):
+                #     continue
 
-                elif news_date[0] == formatted_day_before_yesterday:
-                    stop_crawling = True
-                    break
+                # elif news_date[0] == formatted_day_before_yesterday:
+                #     stop_crawling = True
+                #     break
 
                 page_url = news.find("p", class_="news__item-title").find("a").get("href")
 
@@ -86,8 +87,10 @@ def scrap_xabar():
             page = request_page(f"https://xabar.uz/uz/yangiliklar?load={number_of_articles}&_pjax=%23p0", headers)
             log_file.write("\n" + 20 * "-" + "\n" + "MAIN PAGE LINK: " + f"https://xabar.uz/uz/yangiliklar?load={number_of_articles}&_pjax=%23p0" + "\n")
             soup = BeautifulSoup(page.content, "html.parser")
-            news_items = soup.find_all("div", class_="media-info")[:-5]
+            news_items = soup.find_all("div", class_="media-info")
+            news_items = news_items[:-5][offset:]
             number_of_articles += 20
+            offset += 20
 
     print(f"Data has been written to {csv_file}")
 
