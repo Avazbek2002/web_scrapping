@@ -50,9 +50,9 @@ def scrap_zarnews():
 
                 article_soup = BeautifulSoup(article_page.content, "html.parser")
 
-                article_title = article_soup.find("h1", class_="single-post__entry-title").get_text()
+                article_title = article_soup.find("h1", class_="single-post__entry-title").get_text().strip()
 
-                article_category = article_soup.find("li", class_="entry__meta-comments").find("a").get_text()
+                article_category = article_soup.find("li", class_="entry__meta-comments").find("a").get_text().strip()
 
                 article_paras = article_soup.find("div", class_="entry__article").find_all("p")
 
