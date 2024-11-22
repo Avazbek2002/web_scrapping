@@ -107,23 +107,4 @@ def request_page(link):
     return extended_page
 
 
-def request_page(link):
-    try:
-        extended_page = requests.get(link)
-        # Check if the request was successful
-        if extended_page.status_code == 200:
-            print("Item page fetched successfully!")
-        else:
-            print(f"Failed to fetch the item page. Status code: {extended_page.status_code}")
-
-    except requests.exceptions.ConnectionError as e:
-        print(f"Connection error occurred: {e}")
-    except requests.exceptions.Timeout as e:
-        print(f"Request timed out: {e}")
-    except requests.exceptions.RequestException as e:
-        print(f"An error occurred: {e}")
-
-    return extended_page
-
-
 scrap_zarnews()
