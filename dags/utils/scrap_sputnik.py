@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import re
 from datetime import datetime, timedelta
 import csv
+import time
 
 headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -59,6 +60,7 @@ with open(csv_file, mode='w', newline='', encoding='utf-8') as file:
 
     while not stop_crawling:
         for news in news_items:
+            time.sleep(2)
             article_link = news.find("a").get("href")
 
             if not article_link.startswith("https"):
@@ -111,7 +113,8 @@ with open(csv_file, mode='w', newline='', encoding='utf-8') as file:
             }
             
             writer.writerow(row_news)
-        
+
+        time.sleep(2)
         extended_link = soup.find("div", class_="list-items-loaded")
 
         if extended_link:
@@ -122,7 +125,6 @@ with open(csv_file, mode='w', newline='', encoding='utf-8') as file:
         log_file.write("\n" + 20 * "-" + "\n" + "MAIN PAGE LINK: " + news_list_url + extended_link + "\n")
 
         soup = request_page(URL + extended_link, headers)
-
 
         news_items = soup.find_all("div", class_="list__item")
 
