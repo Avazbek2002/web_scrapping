@@ -1,6 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver import ActionChains
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import time
 import csv
 
@@ -24,10 +26,12 @@ page_num = 1
 
 # Initialize CSV file
 csv_file = "scrap_uzreport.csv"
-fieldnames = ['Category', 'Title', 'Description', 'Full Text']
+fieldnames = ['Category', 'Title', 'Description', 'FullText']
 with open(csv_file, mode='w', newline='', encoding='utf-8') as file:
     writer = csv.DictWriter(file, fieldnames=fieldnames)
     writer.writeheader()
+
+wait = WebDriverWait(driver, 10)
 
 
 while True:
@@ -35,7 +39,10 @@ while True:
         try:
             news_link = news.find_element(By.TAG_NAME, 'a').get_attribute("href")
             news_date = news.find_element(By.XPATH, '//li[@class="time"]').find_element(By.TAG_NAME, "a").text
-            news_category = news.find_element(By.XPATH, '//li[@class="rubric"]').find_element(By.TAG_NAME, 'a').text
+            # news_category = news.find_element(By.XPATH, '//li[@class="rubric"]').find_element(By.TAG_NAME, 'a').text
+            news_category = wait.until(
+                EC.presence_of_element_located((By.XPATH, '//li[@class="rubric"]/a'))
+            ).text
             driver_page.get(news_link)
             news_title = driver_page.find_element(By.XPATH, '//div[@class="row center_panel_row"]').find_element(By.TAG_NAME, "h1").text
             paragraphs = driver_page.find_element(By.XPATH, '//div[@class="center_panel"]').find_elements(By.TAG_NAME, "p")
@@ -44,7 +51,7 @@ while True:
                 page_pure_text = page_pure_text + para.text
             
             row = {
-                        'Category': news_category,
+                        'Category': '',
                         'Title': news_title,
                         'Description': '',
                         'FullText': page_pure_text
