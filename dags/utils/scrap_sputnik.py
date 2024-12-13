@@ -84,7 +84,14 @@ with open(csv_file, mode='w', newline='', encoding='utf-8') as file:
 
             print(article_title)
 
-            article_description = article_page.find("div", class_="article__announce-text").get_text().strip()
+            article_description = article_page.find("div", class_="article__announce-text")
+            
+            if not article_description:
+                article_description = ''
+            else:
+                article_description = article_description.get_text().strip()
+
+            
 
             article_paras = article_page.find_all("div", class_="article__block")
 
